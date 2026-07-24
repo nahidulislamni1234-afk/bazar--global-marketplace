@@ -1,0 +1,28 @@
+{
+  "name": "bazar-x-global-marketplace",
+  "version": "1.0.0",
+  "description": "BAZAR X - A modern global marketplace connecting buyers, sellers, wholesalers and businesses worldwide.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "marketplace",
+    "global-marketplace",
+    "online-shopping",
+    "wholesale",
+    "reselling",
+    "seller-dashboard",
+    "admin-dashboard"
+  ],
+  "author": "BAZAR X",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}s

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAZAR X | Global Marketplace</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,"Noto Sans Bengali",sans-serif}
+:root{--navy:#07152f;--blue:#0b3b91;--green:#16a34a;--light:#f4f8ff;--text:#172033}
+body{background:var(--light);color:var(--text)}
+header{background:rgba(7,21,47,.98);color:#fff;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px;position:sticky;top:0;z-index:1000;box-shadow:0 5px 20px #0003}
+.logo-box{display:flex;align-items:center;gap:10px}
+.logo-icon{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#0ea5e9,#1d4ed8,#16a34a);display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:900}
+.logo-text{font-size:24px;font-weight:900;letter-spacing:2px}.logo-text span{color:#22c55e}
+nav{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:8px;cursor:pointer}
+nav a:hover{background:#2563eb}.cart-btn{background:#16a34a}
+
+/* FULL BRAND IMAGE: keep original proportions so every detail remains visible */
+.brand-showcase{width:100%;padding:16px 3%;background:linear-gradient(135deg,#eaf5ff,#fff,#effdf4)}
+.brand-image-wrapper{width:100%;max-width:1600px;margin:auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 40px #0002}
+.brand-image{width:100%;height:auto;display:block}
+
+/* responsive image readability */
+@media(max-width:700px){
+ .brand-showcase{padding:6px 4px}
+ .brand-image-wrapper{border-radius:8px}
+}
+
+/* HERO */
+.hero{padding:65px 7%;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:35px;background:linear-gradient(120deg,#06142e,#0b3b91,#0f766e)}
+.hero-content{max-width:700px}.badge{display:inline-block;padding:8px 15px;border-radius:30px;background:#ffffff1f;border:1px solid #ffffff55;margin-bottom:18px}
+.hero h1{font-size:48px;line-height:1.15;margin-bottom:18px}.hero h1 span{color:#4ade80}
+.hero p{font-size:18px;line-height:1.8;color:#e0e7ff}
+.hero-buttons{margin-top:25px;display:flex;gap:12px;flex-wrap:wrap}
+.primary-btn,.secondary-btn{padding:14px 23px;border:0;border-radius:10px;cursor:pointer;font-size:16px;font-weight:bold}
+.primary-btn{background:#22c55e;color:#fff}.secondary-btn{background:#fff;color:#0b3b91}
+.hero-visual{width:270px;height:270px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#16a34a,#f59e0b);display:flex;align-items:center;justify-content:center;box-shadow:0 0 70px #22c55e55;font-size:125px}
+
+/* TRUST */
+.trust-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;padding:24px 6%;background:#fff;box-shadow:0 5px 20px #0000000d}
+.trust-card{text-align:center;padding:14px}.trust-card .icon{font-size:29px;margin-bottom:7px}.trust-card p{color:#64748b;margin-top:4px}
+
+/* SEARCH & SECTIONS */
+.search-area{padding:28px 6% 8px;display:flex;justify-content:center}
+.search-box{width:100%;max-width:800px;display:flex;background:#fff;padding:7px;border-radius:14px;box-shadow:0 5px 20px #00000012}
+.search-box input{flex:1;padding:14px;border:0;outline:0;font-size:16px}.search-box button{padding:0 20px;border:0;background:#2563eb;color:#fff;border-radius:9px;cursor:pointer}
+.section{padding:35px 6%}.section-title{text-align:center;margin-bottom:24px}.section-title h2{font-size:30px;color:#0b3b91}.section-title p{color:#64748b;margin-top:7px}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px}
+.category{background:#fff;padding:20px 10px;border-radius:14px;text-align:center;cursor:pointer;border:2px solid transparent;box-shadow:0 5px 15px #0000000d;transition:.3s}
+.category:hover,.category.active{border-color:#2563eb;transform:translateY(-4px)}.category .emoji{font-size:38px;margin-bottom:7px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.product-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px #00000014;transition:.3s}.product-card:hover{transform:translateY(-6px)}
+.product-image{height:190px;background:linear-gradient(135deg,#dbeafe,#eff6ff);display:flex;align-items:center;justify-content:center;font-size:85px}
+.product-info{padding:17px}.category-label{color:#64748b;font-size:13px}.product-info h3{margin:7px 0}.price{color:#16a34a;font-size:21px;font-weight:bold;margin:9px 0}
+.product-actions{display:flex;gap:8px}.product-actions button{flex:1;padding:10px;border:0;border-radius:8px;cursor:pointer}.buy-btn{background:#2563eb;color:#fff}.details-btn{background:#e0e7ff;color:#1e3a8a}
+
+/* PANELS */
+.panel{display:none;background:#fff;margin:28px auto;max-width:1100px;padding:24px;border-radius:14px;box-shadow:0 5px 20px #00000014}.panel h2{color:#0b3b91;margin-bottom:18px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #e5e7eb;gap:10px}.remove-btn{background:#dc2626;color:#fff;border:0;padding:7px 11px;border-radius:6px;cursor:pointer}.cart-total{text-align:right;font-size:22px;font-weight:bold;margin:18px 0}.checkout-btn{background:#16a34a;color:#fff;border:0;padding:12px 20px;border-radius:8px;cursor:pointer}
+.login-form,.admin-form{max-width:460px;margin:auto}.login-form input,.admin-form input,.admin-form select{width:100%;padding:12px;margin:7px 0;border:1px solid #d1d5db;border-radius:7px}.login-form button,.admin-form button{width:100%;padding:12px;border:0;border-radius:7px;background:#2563eb;color:#fff;cursor:pointer}
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}.stat{padding:23px;background:#eff6ff;border-radius:12px;text-align:center}.stat h2{font-size:28px;color:#2563eb}
+
+/* PARTNERS */
+.partner-section{background:#fff;padding:42px 6%;margin-top:18px}.partner-title{text-align:center;margin-bottom:22px}.partner-title h2{color:#0b3b91}.partner-title p{color:#64748b;margin-top:6px}
+.partner-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px}.partner{min-height:85px;border:1px solid #e2e8f0;border-radius:13px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;font-weight:bold;background:#f8fafc;transition:.3s}.partner:hover{transform:translateY(-4px);box-shadow:0 8px 20px #00000012}
+.bkash{color:#e2136e}.nagad{color:#f0442e}.rocket{color:#7139a6}.bank{color:#0b3b91}
+
+/* SECURITY */
+.security-section{padding:48px 6%;background:linear-gradient(120deg,#07152f,#0b3b91);color:#fff}.security-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.security-card{padding:23px;border-radius:14px;background:#ffffff1a;border:1px solid #ffffff33}.security-card h3{margin:10px 0}.security-icon{font-size:36px}
+
+/* FOOTER */
+footer{background:#07152f;color:#fff;padding:38px 6%;text-align:center}.footer-logo{font-size:29px;font-weight:bold;margin-bottom:12px}.footer-links{margin:18px 0}.footer-links a{color:#cbd5e1;margin:0 9px;cursor:pointer}
+
+/* MOBILE */
+@media(max-width:800px){
+ header{flex-direction:column}.hero{flex-direction:column;text-align:center;padding:50px 6%}.hero h1{font-size:36px}.hero-visual{width:220px;height:220px;font-size:100px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo-box">
+  <div class="logo-icon">B</div>
+  <div class="logo-text">BAZAR <span>X</span></div>
+ </div>
+ <nav>
+  <a onclick="goHome()">Home</a>
+  <a onclick="showCategories()">Categories</a>
+  <a onclick="showLogin()">Login</a>
+  <a onclick="showAdmin()">Admin</a>
+  <a class="cart-btn" onclick="showCart()">🛒 Cart <span id="cartCount">0</span></a>
+ </nav>
+</header>
+
+<!-- VISITOR ENTERS: FULL ORIGINAL BRAND IMAGE -->
+<section class="brand-showcase">
+ <div class="brand-image-wrapper">
+  <img src="34683.png" alt="BAZAR X Global Marketplace" class="brand-image">
+ </div>
+</section>
+
+<section class="hero">
+ <div class="hero-content">
+  <div class="badge">🌍 Global Marketplace • Trusted Intermediary</div>
+  <h1>Buy Smart.<br><span>Sell Worldwide.</span></h1>
+  <p>BAZAR X connects buyers and sellers through a modern, secure and transparent marketplace platform.</p>
+  <div class="hero-buttons">
+   <button class="primary-btn" onclick="showCategories()">Explore Products</button>
+   <button class="secondary-btn" onclick="showLogin()">Join Bazar X</button>
+  </div>
+ </div>
+ <div class="hero-visual">🛒</div>
+</section>
+
+<section class="trust-bar">
+ <div class="trust-card"><div class="icon">🛡️</div><b>Secure Marketplace</b><p>Safe transactions</p></div>
+ <div class="trust-card"><div class="icon">🌍</div><b>Global Access</b><p>Buy & sell worldwide</p></div>
+ <div class="trust-card"><div class="icon">🤝</div><b>Trusted Intermediary</b><p>Fair transactions</p></div>
+ <div class="trust-card"><div class="icon">💬</div><b>Support Center</b><p>Help when you need</p></div>
+</section>
+
+<section class="search-area">
+ <div class="search-box">
+  <input id="searchInput" type="text" placeholder="Search products, categories..." onkeyup="searchProducts()">
+  <button onclick="searchProducts()">🔍 Search</button>
+ </div>
+</section>
+
+<section class="section" id="categories">
+ <div class="section-title"><h2>Explore Categories</h2><p>Choose a category and discover products</p></div>
+ <div class="category-grid">
+  <div class="category active" onclick="filterProducts('All',this)"><div class="emoji">🛍️</div><b>All Products</b></div>
+  <div class="category" onclick="filterProducts('Electronics',this)"><div class="emoji">📱</div><b>Electronics</b></div>
+  <div class="category" onclick="filterProducts('Fashion',this)"><div class="emoji">👕</div><b>Fashion</b></div>
+  <div class="category" onclick="filterProducts('Home',this)"><div class="emoji">🏠</div><b>Home & Living</b></div>
+  <div class="category" onclick="filterProducts('Beauty',this)"><div class="emoji">💄</div><b>Beauty</b></div>
+  <div class="category" onclick="filterProducts('Automotive',this)"><div class="emoji">🚗</div><b>Automotive</b></div>
+  <div class="category" onclick="filterProducts('Wholesale',this)"><div class="emoji">📦</div><b>Wholesale</b></div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="section-title"><h2>Featured Products</h2><p>Discover popular products from trusted sellers</p></div>
+ <div class="products" id="productList"></div>
+</section>
+
+<section class="panel" id="cartPanel">
+ <h2>🛒 Your Shopping Cart</h2>
+ <div id="cartItems"></div>
+ <div class="cart-total">Total: ৳<span id="cartTotal">0</span></div>
+ <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+</section>
+
+<section class="panel" id="loginPanel">
+ <h2>🔐 Login / Create Account</h2>
+ <div class="login-form">
+  <input type="email" placeholder="Email Address">
+  <input type="password" placeholder="Password">
+  <button onclick="loginUser()">Login / Register</button>
+ </div>
+</section>
+
+<section class="panel" id="adminPanel">
+ <h2>⚙️ Admin Dashboard</h2>
+ <div class="admin-grid">
+  <div class="stat"><p>Total Products</p><h2 id="totalProducts">0</h2></div>
+  <div class="stat"><p>Total Orders</p><h2>1,245</h2></div>
+  <div class="stat"><p>Active Sellers</p><h2>856</h2></div>
+  <div class="stat"><p>Registered Users</p><h2>12,450</h2></div>
+ </div>
+ <br>
+ <h3>Add New Product</h3>
+ <div class="admin-form">
+  <input id="newName" placeholder="Product Name">
+  <input id="newPrice" type="number" placeholder="Price">
+  <select id="newCategory">
+   <option>Electronics</option><option>Fashion</option><option>Home</option><option>Beauty</option><option>Automotive</option><option>Wholesale</option>
+  </select>
+  <button onclick="addProduct()">Add Product</button>
+ </div>
+</section>
+
+<section class="partner-section">
+ <div class="partner-title"><h2>Supported Payment Options</h2><p>Convenient payment options for our users</p></div>
+ <div class="partner-grid">
+  <div class="partner bkash">💳<br>bKash</div>
+  <div class="partner nagad">💰<br>Nagad</div>
+  <div class="partner rocket">🚀<br>Rocket</div>
+  <div class="partner">💳<br>VISA</div>
+  <div class="partner">💳<br>Mastercard</div>
+  <div class="partner">🏦<br>Bank Transfer</div>
+ </div>
+</section>
+
+<section class="partner-section">
+ <div class="partner-title"><h2>Banking Options</h2><p>Banking options may vary by country and availability</p></div>
+ <div class="partner-grid">
+  <div class="partner bank">🏦<br>BRAC BANK</div>
+  <div class="partner bank">🏦<br>SONALI BANK</div>
+  <div class="partner bank">🏦<br>UTTARA BANK</div>
+  <div class="partner bank">🏦<br>EASTERN BANK</div>
+  <div class="partner bank">🏦<br>CITY BANK</div>
+  <div class="partner bank">🏦<br>AGRANI BANK</div>
+  <div class="partner bank">🏦<br>ISLAMI BANK</div>
+ </div>
+</section>
+
+<section class="security-section">
+ <div class="section-title"><h2 style="color:white">Why Choose Bazar X?</h2></div>
+ <div class="security-grid">
+  <div class="security-card"><div class="security-icon">🛡️</div><h3>Verified Sellers</h3><p>Seller verification helps create a safer marketplace.</p></div>
+  <div class="security-card"><div class="security-icon">🔒</div><h3>Secure Payments</h3><p>Multiple payment options for convenient transactions.</p></div>
+  <div class="security-card"><div class="security-icon">⚖️</div><h3>Fair Marketplace</h3><p>Designed to connect buyers and sellers transparently.</p></div>
+  <div class="security-card"><div class="security-icon">🌍</div><h3>Global Commerce</h3><p>Discover products from different markets.</p></div>
+ </div>
+</section>
+
+<footer>
+ <div class="footer-logo">BAZAR X</div>
+ <p>Global Marketplace | Connecting Buyers & Sellers</p>
+ <div class="footer-links">
+  <a onclick="showLogin()">Login</a><a onclick="showCategories()">Categories</a><a onclick="showCart()">Cart</a><a onclick="showAdmin()">Admin</a>
+ </div>
+ <p>© 2026 Bazar X. All Rights Reserved.</p>
+</footer>
+
+<script>
+let products=[
+{name:"Premium Smartphone",price:45000,category:"Electronics",icon:"📱"},
+{name:"Wireless Headphones",price:3500,category:"Electronics",icon:"🎧"},
+{name:"Premium Fashion Shirt",price:1800,category:"Fashion",icon:"👕"},
+{name:"Modern Home Furniture",price:25000,category:"Home",icon:"🛋️"},
+{name:"Beauty Care Set",price:2200,category:"Beauty",icon:"💄"},
+{name:"Car Accessories",price:5000,category:"Automotive",icon:"🚗"},
+{name:"Wholesale Product Lot",price:75000,category:"Wholesale",icon:"📦"},
+{name:"Smart Watch",price:5500,category:"Electronics",icon:"⌚"}
+];
+let cart=[];
+
+function displayProducts(list=products){
+ const el=document.getElementById("productList");el.innerHTML="";
+ list.forEach((p,index)=>{
+  el.innerHTML+=`<div class="product-card"><div class="product-image">${p.icon}</div><div class="product-info"><span class="category-label">${p.category}</span><h3>${p.name}</h3><div class="price">৳${p.price.toLocaleString()}</div><div class="product-actions"><button class="buy-btn" onclick="addToCart(${index})">Add to Cart</button><button class="details-btn" onclick="showDetails('${p.name}')">Details</button></div></div></div>`;
+ });
+ document.getElementById("totalProducts").innerText=products.length;
+}
+function filterProducts(cat,el){
+ document.querySelectorAll(".category").forEach(x=>x.classList.remove("active"));el.classList.add("active");
+ displayProducts(cat==="All"?products:products.filter(p=>p.category===cat));
+}
+function searchProducts(){
+ let q=document.getElementById("searchInput").value.toLowerCase();
+ displayProducts(products.filter(p=>p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)));
+}
+function addToCart(i){cart.push(products[i]);updateCart();alert("Product added to cart!")}
+function updateCart(){
+ document.getElementById("cartCount").innerText=cart.length;
+ let el=document.getElementById("cartItems"),total=0;el.innerHTML="";
+ cart.forEach((p,i)=>{total+=p.price;el.innerHTML+=`<div class="cart-item"><div>${p.icon} <b>${p.name}</b></div><div>৳${p.price.toLocaleString()} <button class="remove-btn" onclick="removeFromCart(${i})">Remove</button></div></div>`});
+ document.getElementById("cartTotal").innerText=total.toLocaleString();
+}
+function removeFromCart(i){cart.splice(i,1);updateCart()}
+function checkout(){if(!cart.length)return alert("Your cart is empty.");alert("Checkout demo. Real payment gateway can be integrated here.")}
+function addProduct(){
+ let name=document.getElementById("newName").value,price=Number(document.getElementById("newPrice").value),category=document.getElementById("newCategory").value;
+ if(!name||!price)return alert("Please enter product name and price.");
+ products.push({name,price,category,icon:"📦"});displayProducts();alert("Product added successfully!");
+}
+function showDetails(name){alert(name+"\n\nProduct details page can be connected to a database.")}
+function hidePanels(){document.querySelectorAll(".panel").forEach(p=>p.style.display="none")}
+function showCart(){hidePanels();let p=document.getElementById("cartPanel");p.style.display="block";p.scrollIntoView({behavior:"smooth"})}
+function showLogin(){hidePanels();let p=document.getElementById("loginPanel");p.style.display="block";p.scrollIntoView({behavior:"smooth"})}
+function showAdmin(){hidePanels();let p=document.getElementById("adminPanel");p.style.display="block";p.scrollIntoView({behavior:"smooth"})}
+function showCategories(){document.getElementById("categories").scrollIntoView({behavior:"smooth"})}
+function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
+function loginUser(){alert("Demo login successful!")}
+displayProducts();updateCart();
+</script>
+</body>
+</html>
